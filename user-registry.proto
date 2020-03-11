@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package registry;
+
+service UserRegistry {
+    rpc GetUser(UserQuerry) returns (UserResponse) {}
+    rpc UpdateUser(UpdateUserQuery) returns (VoidResponse) {}
+}
+
+message UpdateUserQuery {
+    string id = 1;
+    string name = 2;
+}
+
+message UserQuerry {
+    string id = 1;
+}
+
+message VoidResponse {
+    string error = 1;
+}
+
+message UserResponse {
+    User user = 1;
+    string error = 2;
+}
+
+message User {
+    string id = 1;
+    string name = 2;
+}

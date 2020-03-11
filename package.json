@@ -1,0 +1,25 @@
+{
+  "name": "user-registry",
+  "version": "0.0.1",
+  "description": "Abstraction on top of database to manipulate user data",
+  "main": "out/index.js",
+  "author": "q_link0_p",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node out/index.js",
+    "proto": "sh ./scripts/proto.sh",
+    "build": "sh ./scripts/build.sh"
+  },
+  "devDependencies": {
+    "@types/google-protobuf": "^3.7.2",
+    "grpc-tools": "^1.8.1",
+    "grpc_tools_node_protoc_ts": "^2.5.10",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@grpc/proto-loader": "^0.5.3",
+    "google-protobuf": "^3.11.4",
+    "grpc": "^1.24.2"
+  }
+}
