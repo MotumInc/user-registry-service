@@ -13,3 +13,5 @@ If you want to put everything into docker container:
 - First build with: `yarn build`
 - Build container: `docker build -t invictamotum/user-registry .`
 - Start container: `docker run -p <mapped_port>:5505 -d invictamotum/user-registry`
+
+For more info on docker refer to the official doccumentation
