@@ -10,7 +10,8 @@
     "start": "node out/server.js",
     "clear": "rm -Rf out",
     "proto": "sh ./scripts/proto.sh",
-    "build": "sh ./scripts/build.sh"
+    "build": "sh ./scripts/build.sh",
+    "docker": "docker build -t invictamotum/user-registry ."
   },
   "devDependencies": {
     "@types/google-protobuf": "^3.7.2",
