@@ -2,12 +2,13 @@
   "name": "user-registry",
   "version": "0.0.1",
   "description": "Abstraction on top of database to manipulate user data",
-  "main": "out/index.js",
+  "main": "out/server.js",
   "author": "q_link0_p",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "node out/index.js",
+    "start": "node out/server.js",
+    "clear": "rm -Rf out",
     "proto": "sh ./scripts/proto.sh",
     "build": "sh ./scripts/build.sh"
   },
@@ -19,7 +20,12 @@
   },
   "dependencies": {
     "@grpc/proto-loader": "^0.5.3",
+    "@types/dotenv-safe": "^8.1.0",
+    "@types/mongoose": "^5.7.6",
+    "dotenv-safe": "^8.2.0",
     "google-protobuf": "^3.11.4",
-    "grpc": "^1.24.2"
+    "grpc": "^1.24.2",
+    "mongo": "^0.1.0",
+    "mongoose": "^5.9.4"
   }
 }

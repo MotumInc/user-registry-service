@@ -3,7 +3,7 @@ syntax = "proto3";
 package registry;
 
 service UserRegistry {
-    rpc GetUser(UserQuerry) returns (UserResponse) {}
+    rpc GetUser(UserQuery) returns (UserResponse) {}
     rpc UpdateUser(UpdateUserQuery) returns (VoidResponse) {}
 }
 
@@ -12,7 +12,7 @@ message UpdateUserQuery {
     string name = 2;
 }
 
-message UserQuerry {
+message UserQuery {
     string id = 1;
 }
 

@@ -1,11 +1,13 @@
 FROM node:12
 
-WORKDIR out
+WORKDIR /usr/user-registry
 
 COPY package.json ./
 COPY yarn.lock ./
-COPY . .
-# RUN npm install -g yarn
+COPY .env ./
+COPY .env.example ./
+COPY ${CERT_PATH} ./
+COPY out ./
 RUN yarn install
 
 EXPOSE 5505
