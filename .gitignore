@@ -6,3 +6,4 @@ protobuf-gen
 *.pem
 *.crt
 *.key
+keys

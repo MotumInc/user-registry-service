@@ -6,11 +6,14 @@ const getUser = handleUnaryCall<UserQuery, User>(async call => {
     const { id } = call.request.toObject()
     const user = await UserModel.findById(id)
     if (!user) throw Error("Cannot find specified user")
-    const { name } = user.toObject()
+    const { name, login, hash, tokenRevision } = user.toObject()
 
     const responseUser = new User()
     responseUser.setId(id)
     responseUser.setName(name)
+    responseUser.setLogin(login)
+    responseUser.setHash(hash)
+    responseUser.setTokenrevision(tokenRevision)
 
     return responseUser
 })

@@ -1,4 +1,4 @@
-import { Server, credentials, ServerCredentials } from "grpc"
+import { Server, ServerCredentials } from "grpc"
 import mongoose from "mongoose"
 import { config } from "dotenv-safe"
 
@@ -23,13 +23,12 @@ const asyncBind = (
 const grpcServer = async (
     address: string,
     port: string | number,
-    certPath: string
 ) => {
     const server = new Server()
     server.addService(UserRegistryService, services)
     await asyncBind(
         server,
-        `${BIND_ADDRESS}:${PORT}`,
+        `${address}:${port}`,
         ServerCredentials.createInsecure()
     )
     return server
@@ -44,7 +43,7 @@ const mongoConnection = (url: string) =>
     try {
         const [mongo, server] = await Promise.all([
             mongoConnection(MONGO_URL!),
-            grpcServer(BIND_ADDRESS!, PORT!, CERT_PATH!)
+            grpcServer(BIND_ADDRESS!, PORT!)
         ])
         server.start()
     } catch (e) {

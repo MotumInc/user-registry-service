@@ -6,11 +6,14 @@ const addUser = handleUnaryCall<AddUserRequest, User>(async call => {
     const user = call.request.toObject()
     const dbUser = new UserModel(user)
     await dbUser.save()
-    const { id, name } = dbUser.toObject()
+    const { id, name, hash, login } = dbUser.toObject()
 
     const res = new User()
     res.setId(id)
     res.setName(name)
+    res.setLogin(login)
+    res.setHash(hash)
+    res.setTokenrevision(0)
     return res
 })
 
