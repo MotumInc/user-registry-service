@@ -1,3 +1,4 @@
+[![DeepScan grade](https://deepscan.io/api/teams/8152/projects/10303/branches/140831/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=8152&pid=10303&bid=140831)
 # cloud-user-registry
 A microservice for "Intro to the cloud technologies" responsible for abstracting away database access
 
