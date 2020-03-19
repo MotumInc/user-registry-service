@@ -6,7 +6,7 @@ import { UserRegistryService } from "./protobuf-gen/user-registry_grpc_pb"
 import services from "./services"
 
 config()
-const { BIND_ADDRESS, PORT, CERT_PATH, MONGO_URL } = process.env
+const { BIND_ADDRESS, PORT, MONGO_URL } = process.env
 
 const asyncBind = (
     server: Server,
