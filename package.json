@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "node out/server.js",
+    "start": "node -r dotenv-safe/config out/server.js",
     "clear": "rm -Rf out",
     "proto": "sh ./scripts/proto.sh",
     "prisma": "prisma generate",

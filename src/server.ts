@@ -1,13 +1,11 @@
 import { Server, ServerCredentials } from "grpc"
 import { PrismaClient } from "@prisma/client";
-import { config } from "dotenv-safe"
 
 import { UserRegistryService } from "./protobuf-gen/user-registry_grpc_pb"
 import services from "./services"
 import { mapValues } from "./util";
 
-config()
-const { BIND_ADDRESS, PORT, MONGO_URL } = process.env
+const { BIND_ADDRESS, PORT } = process.env
 
 const asyncBind = (
     server: Server,
