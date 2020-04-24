@@ -1,9 +1,10 @@
 import { Server, ServerCredentials } from "grpc"
-import mongoose from "mongoose"
+import { PrismaClient } from "@prisma/client";
 import { config } from "dotenv-safe"
 
 import { UserRegistryService } from "./protobuf-gen/user-registry_grpc_pb"
 import services from "./services"
+import { mapValues } from "./util";
 
 config()
 const { BIND_ADDRESS, PORT, MONGO_URL } = process.env
@@ -23,9 +24,10 @@ const asyncBind = (
 const grpcServer = async (
     address: string,
     port: string | number,
+    prisma: PrismaClient
 ) => {
     const server = new Server()
-    server.addService(UserRegistryService, services)
+    server.addService(UserRegistryService, mapValues(services, init => init(prisma)))
     await asyncBind(
         server,
         `${address}:${port}`,
@@ -34,20 +36,17 @@ const grpcServer = async (
     return server
 }
 
-const mongoConnection = (url: string) =>
-    mongoose.connect(url, {
-        useUnifiedTopology: true,
-        useNewUrlParser: true
-    })
-;(async () => {
+const prisma = new PrismaClient()
+
+const main = async () => {
     try {
-        const [mongo, server] = await Promise.all([
-            mongoConnection(MONGO_URL!),
-            grpcServer(BIND_ADDRESS!, PORT!)
-        ])
+        const server = await grpcServer(BIND_ADDRESS!, PORT!, prisma)
         server.start()
     } catch (e) {
         console.error(e)
-        process.exit(-1)
+        prisma.disconnect()
+        process.exit(1)
     }
-})()
+}
+
+main()

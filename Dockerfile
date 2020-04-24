@@ -6,7 +6,6 @@ COPY package.json ./
 COPY yarn.lock ./
 COPY .env ./
 COPY .env.example ./
-COPY ${CERT_PATH} ./
 COPY out ./
 RUN yarn install
 

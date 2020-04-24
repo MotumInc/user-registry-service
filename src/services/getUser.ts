@@ -1,21 +1,22 @@
-import { handleUnaryCall } from "./serviceHandler";
-import UserModel from "../models/User";
-import { UserQuery, User } from "../protobuf-gen/user-registry_pb";
+import { handleUnaryCall, whereClause } from "./serviceHandler";
+import { UserQuery, User, UserResponse } from "../protobuf-gen/user-registry_pb";
 
-const getUser = handleUnaryCall<UserQuery, User>(async call => {
-    const { id } = call.request.toObject()
-    const user = await UserModel.findById(id)
-    if (!user) throw Error("Cannot find specified user")
-    const { name, login, hash, tokenRevision } = user.toObject()
+export default handleUnaryCall<UserQuery, UserResponse>(async (prisma, call) => {
+    const user = await prisma.user.findOne({ where: whereClause(call.request) })
+    const response = new UserResponse()
 
-    const responseUser = new User()
-    responseUser.setId(id)
-    responseUser.setName(name)
-    responseUser.setLogin(login)
-    responseUser.setHash(hash)
-    responseUser.setTokenrevision(tokenRevision)
+    if (user) {
+        const { id, name, login, hash, tokenRevision } = user
 
-    return responseUser
+        const responseUser = new User()
+        responseUser.setId(String(id))
+        responseUser.setName(name)
+        responseUser.setLogin(login)
+        responseUser.setHash(hash)
+        responseUser.setTokenRevision(tokenRevision)
+
+        response.setUser(responseUser)
+    }
+
+    return response
 })
-
-export default getUser

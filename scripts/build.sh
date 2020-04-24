@@ -1,4 +1,5 @@
 yarn proto &&
+yarn prisma &&
 if [ "$1" = "prod" ]; then
     yarn clear
     yarn tsc --build tsconfig.prod.json
