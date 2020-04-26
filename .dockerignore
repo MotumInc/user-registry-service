@@ -1,1 +1,10 @@
 node_modules
+out
+vscode
+yarn-error.log
+README.md
+Dockerfile
+.gitignore
+.git
+.client.js
+.prettierrc
