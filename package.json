@@ -12,7 +12,8 @@
     "proto": "sh ./scripts/proto.sh",
     "prisma": "prisma generate",
     "build": "sh ./scripts/build.sh",
-    "docker": "docker build -t invictamotum/user-registry ."
+    "docker": "docker build -t invictamotum/user-registry .",
+    "postinstall": "prisma generate"
   },
   "devDependencies": {
     "@prisma/cli": "2.0.0-beta.3",
