@@ -34,11 +34,26 @@ const grpcServer = async (
     return server
 }
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient({
+    log: [
+        {
+            level: "info",
+            emit: "stdout"
+        },
+        {
+            level: "query",
+            emit: "stdout"
+        },
+        {
+            level: "warn",
+            emit: "stdout"
+        }
+    ]
+})
 
 const main = async () => {
     try {
-        const server = await grpcServer(BIND_ADDRESS!, PORT!, prisma)
+        const [server, _] = await Promise.all([grpcServer(BIND_ADDRESS!, PORT!, prisma), prisma.connect()])
         server.start()
     } catch (e) {
         console.error(e)
