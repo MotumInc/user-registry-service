@@ -8,9 +8,12 @@ datasource db {
 }
 
 model User {
-  hash          String
-  id            Int    @default(autoincrement()) @id
-  login         String @unique
-  name          String
-  tokenRevision Int    @default(0) @map("tokenrevision")
+  avatar      String?
+  bio         String?
+  distance    Float   @default(0)
+  id          Int     @id
+  name        String
+  points      Int     @default(0)
+  steps       Int     @default(0)
+  usingMetric Boolean @default(true) @map("usingmetric")
 }
