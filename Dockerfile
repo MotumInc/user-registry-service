@@ -2,11 +2,13 @@
 FROM node:12 AS base
 WORKDIR /usr/motum/user-registry
 COPY package.json .
+ARG envfile=.env
+ARG port
 
 # Dependancies image
 FROM base AS deps
 COPY yarn.lock .
-COPY .env .
+COPY ${envfile} .
 COPY schema.prisma .
 RUN yarn install --prod
 RUN cp -R node_modules prod_node_modules
@@ -24,9 +26,9 @@ LABEL description="User data store for Motum API"
 LABEL version="0.1.0"
 
 COPY .env.example .
-COPY .env .
+COPY ${envfile} .
 COPY --from=build /usr/motum/user-registry/out ./out
 COPY --from=deps /usr/motum/user-registry/prod_node_modules ./node_modules
 
-EXPOSE 5505
+EXPOSE ${port}
 CMD ["yarn", "start"]
