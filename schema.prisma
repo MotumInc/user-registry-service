@@ -7,13 +7,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Region {
+  id         Int          @default(dbgenerated()) @id
+  name       String
+  UserRegion UserRegion[]
+}
+
 model User {
   avatar      String?
   bio         String?
-  distance    Float   @default(0)
-  id          Int     @id
+  distance    Float        @default(0)
+  id          Int          @id
   name        String
-  points      Int     @default(0)
-  steps       Int     @default(0)
-  usingMetric Boolean @default(true) @map("usingmetric")
+  points      Int          @default(0)
+  steps       Int          @default(0)
+  usingMetric Boolean      @default(true) @map("usingmetric")
+  UserRegion  UserRegion[]
+}
+
+model UserRegion {
+  completion Float  @default(0)
+  id         Int    @default(autoincrement()) @id
+  region     Int
+  user       Int    @map("userid")
+  Region     Region @relation(fields: [region], references: [id])
+  User       User   @relation(fields: [user], references: [id])
 }
