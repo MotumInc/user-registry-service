@@ -28,7 +28,7 @@
     "@prisma/client": "2.0.0-beta.4",
     "dotenv-safe": "^8.2.0",
     "google-protobuf": "^3.11.4",
-    "grpc": "^1.24.2",
+    "grpc": "^1.24.9",
     "mongo": "^0.1.0"
   }
 }
